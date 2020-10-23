@@ -1,0 +1,50 @@
+interactions:
+- request:
+    body: abc
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '3'
+      host:
+      - httpbin.org
+      user-agent:
+      - testclient
+      x-my-jwt:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MDM0NzIyNzUsImlzcyI6InBhbnNlbiIsImp0aSI6InBhbnNlbjpmNDgzOGU5YS03NzQ2LTQxMDgtOGJhYi02NzYwMjYyYzBiYzIiLCJwYXlsb2FkIjp7InVzZXIiOiJyb25ueSIsImRhdGUiOiIyMDIwLTEwLTIzIn19.YZK9uvKPPvdbAG4SmI6XVO3toN0skYBGYzqmv9E9r8jKrTk5Ew4PRmWckz0fcEBtRXt_NQquQ8sS843CBK6I1g
+    method: POST
+    uri: http://httpbin.org/post?a=1&b=2
+  response:
+    body:
+      string: "{\n  \"args\": {\n    \"a\": \"1\", \n    \"b\": \"2\"\n  }, \n  \"data\":
+        \"abc\", \n  \"files\": {}, \n  \"form\": {}, \n  \"headers\": {\n    \"Accept\":
+        \"*/*\", \n    \"Accept-Encoding\": \"gzip, deflate\", \n    \"Content-Length\":
+        \"3\", \n    \"Content-Type\": \"application/octet-stream\", \n    \"Host\":
+        \"httpbin.org\", \n    \"User-Agent\": \"testclient\", \n    \"X-Amzn-Trace-Id\":
+        \"Root=1-5f930b93-44ddea52719121fa34bf763d\", \n    \"X-My-Jwt\": \"Bearer
+        eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MDM0NzIyNzUsImlzcyI6InBhbnNlbiIsImp0aSI6InBhbnNlbjpmNDgzOGU5YS03NzQ2LTQxMDgtOGJhYi02NzYwMjYyYzBiYzIiLCJwYXlsb2FkIjp7InVzZXIiOiJyb25ueSIsImRhdGUiOiIyMDIwLTEwLTIzIn19.YZK9uvKPPvdbAG4SmI6XVO3toN0skYBGYzqmv9E9r8jKrTk5Ew4PRmWckz0fcEBtRXt_NQquQ8sS843CBK6I1g\"\n
+        \ }, \n  \"json\": null, \n  \"origin\": \"79.225.187.23\", \n  \"url\": \"http://httpbin.org/post?a=1&b=2\"\n}\n"
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '805'
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 23 Oct 2020 16:57:55 GMT
+      Server:
+      - gunicorn/19.9.0
+    status:
+      code: 200
+      message: OK
+    url: http://httpbin.org/post?a=1&b=2
+version: 1
