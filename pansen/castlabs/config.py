@@ -11,6 +11,7 @@ class Config:
     JWT_SECRET: str
     JWT_HEADER_NAME: str
     JWT_ISSUER: str
+    HTTP_HOST: str
     HTTP_PORT: int
 
 
@@ -31,6 +32,7 @@ def configure() -> Config:
               'JWT_SECRET',
               'JWT_HEADER_NAME',
               'JWT_ISSUER',
+              'HTTP_HOST',
               ):
         locals()[k] = os.getenv(k)
     # Take all local variables to the `Config` constructor, if they start uppercase

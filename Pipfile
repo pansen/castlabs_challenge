@@ -7,6 +7,8 @@ verify_ssl = true
 pansen-castlabs = {editable = true,path = ".",extras = ["testing"]}
 
 [packages]
+# TODO andi: what's up with the `yarl` issue? Seems not to be that one.
+# https://github.com/pypa/pipenv/issues/1899#issuecomment-378466363
 pansen-castlabs = {editable = true,path = "."}
 
 [requires]

@@ -22,8 +22,8 @@ async def align_possible_testclient(request: Request, call_next):
             and request.headers.get('user-agent', None) == 'testclient' \
             and request.scope['path'] not in [r.path for r in request.app.router.routes]:
         # this will become the `full_path` parameter later
-        request.scope['path'] = f"{request.url.components.scheme}://{request.url.components.netloc}{request.url.components.path}"
-        foo = 1
+        request.scope['path'] = f"{request.url.components.scheme}://" \
+                                f"{request.url.components.netloc}{request.url.components.path}"
 
     return await call_next(request)
 
@@ -75,4 +75,4 @@ def run():
 
     from uvicorn.main import run
 
-    return run('pansen.castlabs.main:app', port=c.HTTP_PORT, log_config=log_config())
+    return run('pansen.castlabs.main:app', host=c.HTTP_HOST, port=c.HTTP_PORT, log_config=log_config())

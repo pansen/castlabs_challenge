@@ -17,6 +17,7 @@ VENV := ./$(VENV_DIRNAME)
 
 .PHONY: bootstrap
 bootstrap:
+	$(PYTHON_GLOBAL) -m pip install --upgrade setuptools wheel
 	@$(PIPENV) > /dev/null 2>&1 \
 		&& echo "Dependencies already exist." \
 		|| $(PYTHON_GLOBAL) -m pip install pipenv
@@ -26,7 +27,9 @@ bootstrap:
 
 .PHONY: build
 build: .env
-	$(PIPENV) install
+	$(PYTHON_GLOBAL) -m venv .venv
+	.venv/bin/pip install --upgrade pip setuptools wheel
+	.venv/bin/pip install -r requirements.txt
 
 .PHONY: dev.build
 dev.build: .env
@@ -35,6 +38,11 @@ dev.build: .env
 .PHONY: dev.lock
 dev.lock:
 	$(PIPENV) lock --dev
+	# TODO andi: this is a hack. `yarl` is not included for some reason, get around it reliably.
+	cat \
+		<($(PIPENV) lock -r) \
+		<(echo 'yarl==1.5.1') \
+		> requirements.txt
 	make dev.build
 
 .PHONY: test
