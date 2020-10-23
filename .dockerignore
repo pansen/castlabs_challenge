@@ -1,7 +1,7 @@
 *
 !Makefile
 !.env.example
-!requirements.txt
+!Pipfile*
 !pansen
 !setup.py
 !README.md

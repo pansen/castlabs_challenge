@@ -27,9 +27,7 @@ bootstrap:
 
 .PHONY: build
 build: .env
-	$(PYTHON_GLOBAL) -m venv .venv
-	.venv/bin/pip install --upgrade pip setuptools wheel
-	.venv/bin/pip install -r requirements.txt
+	$(PIPENV) install
 
 .PHONY: dev.build
 dev.build: .env
@@ -38,12 +36,6 @@ dev.build: .env
 .PHONY: dev.lock
 dev.lock:
 	$(PIPENV) lock --dev
-	# TODO andi: this is a hack. `yarl` is not included for some reason, get around it reliably.
-	cat \
-		<($(PIPENV) lock -r) \
-		<(echo 'yarl==1.5.1') \
-		> requirements.txt
-	make dev.build
 
 .PHONY: test
 test:

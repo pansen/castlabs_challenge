@@ -1,12 +1,14 @@
 FROM python:3.8
 
-RUN mkdir -p /srv/pansen
-COPY . /srv/pansen/
-WORKDIR /srv/pansen
+ENV _WORKDIR=/srv/pansen
+
+RUN mkdir -p ${_WORKDIR}
+COPY . ${_WORKDIR}/
+WORKDIR ${_WORKDIR}
 RUN make bootstrap build
 
 # Ensure we can call our own scripts without any prefix
-ENV PATH=/srv/pansen/.venv/bin:$PATH
+ENV PATH=${_WORKDIR}/.venv/bin:$PATH
 
 EXPOSE 8000
 ENTRYPOINT [ "pansen_castlabs" ]
