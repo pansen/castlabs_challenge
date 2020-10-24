@@ -11,7 +11,7 @@ from pansen.castlabs.main import app
 
 @pytest.fixture(scope="function")
 def config() -> Config:
-    return configure()
+    return configure(app)
 
 
 @pytest.fixture(scope="function")

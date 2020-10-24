@@ -70,7 +70,7 @@ def run():
     """
     Entry-point to have the ability to perform some application start logic.
     """
-    c = configure()
+    c = configure(app)
     app.extra['config'] = c
 
     from uvicorn.main import run

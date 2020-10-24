@@ -9,6 +9,7 @@ from vcr.request import Request
 from pansen.castlabs.config import Config, configure
 from pansen.castlabs.conftest import cast_vcr
 from pansen.castlabs.lib.http import _token
+from pansen.castlabs.main import app
 
 
 def test_get_status(test_client: TestClient):
@@ -53,7 +54,7 @@ def test_token_success():
     os.environ['JWT_HEADER_NAME'] = 'x-foo'
     os.environ['JWT_ISSUER'] = 'testing-issuer'
     os.environ['JWT_SECRET'] = 'abc'
-    c = configure()
+    c = configure(app)
     token = _token(c)
     decoded = jwt.decode(token, c.JWT_SECRET, algorithms=[c.JWT_ALGO, ])
     assert decoded['jti'].startswith(f"{c.JWT_ISSUER}:")
@@ -65,7 +66,7 @@ def test_token_fail():
     os.environ['JWT_HEADER_NAME'] = 'x-foo'
     os.environ['JWT_ISSUER'] = 'testing-issuer'
     os.environ['JWT_SECRET'] = 'abc'
-    c = configure()
+    c = configure(app)
     token = _token(c)
 
     try:
