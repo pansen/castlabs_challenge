@@ -8,11 +8,55 @@ marked as `TODO` in the code and maybe even mentioned below.
 
 ## Usage
 
-### Locally
+This repository is intented to be used locally for execution or development. 
 
-This repository is intented to be used locally for development. 
+### Local Execution 
 
-#### Development Prerequisites
+#### Prerequisites
+
+- You need to have UNIX compatible OS
+- You need Docker installed
+- You need `docker-compose` installed
+- You should have `jq` installed
+   
+#### Go
+
+To just run the current version, use 
+
+```bash
+docker-compose up --build
+```
+
+##### Test
+
+###### Proxy HTTP GET
+
+In an other terminal, you can call 
+
+```bash
+http_proxy=127.0.0.1:8000 curl 'httpbin.org/get?a=1'
+```
+or
+
+###### Proxy HTTP POST
+
+```bash
+http_proxy=127.0.0.1:8000 curl -X POST 'httpbin.org/post?a=1'
+```
+
+to see the thing in action.
+
+###### Proxy Status
+
+To see the status of the instance, call
+
+```bash
+curl -s localhost:8000/status | jq .
+```
+
+### Local Development
+
+#### Prerequisites
 
 - You need to have UNIX compatible OS
 - You need to have `make` and *Python3.8* installed
@@ -25,7 +69,7 @@ This repository is intented to be used locally for development.
   
   ![PyCharm Testrunner Configuration](doc/img/PyCharm_Testrunner.jpg)
 
-#### Development
+#### Go
 
 To build your development environment, use
 
@@ -42,28 +86,3 @@ make test
 Once you followed the prerequisites section, you will also be able to run and debug single tests 
 from PyCharm. 
 
-#### Run Prerequisites
-
-- Docker
-- `docker-compose`
-   
-#### Run
-
-To just run the current version, use 
-
-```bash
-docker-compose up --build
-```
-
-In an other terminal, you can call 
-
-```bash
-http_proxy=127.0.0.1:8000 curl 'httpbin.org/get?a=1'
-```
-to see the thing in action.
-
-To see the status of the instance, call
-
-```bash
-curl localhost:8000/status
-```
