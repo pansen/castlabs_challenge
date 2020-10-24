@@ -58,6 +58,7 @@ ClientResponse, bytes):
                     'host': parsed_url.netloc,
                 },
             }) as response:
+                request.app.extra['counters'][method] = request.app.extra['counters'][method] + 1
                 _body = await response.read()
                 return response, _body
 

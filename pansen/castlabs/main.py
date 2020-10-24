@@ -1,4 +1,5 @@
 import logging
+from datetime import datetime
 
 from aiohttp.hdrs import METH_GET, METH_POST
 from fastapi import FastAPI
@@ -39,11 +40,20 @@ async def add_x_headers(request: Request, call_next):
 
 
 @app.get("/status")
-async def root_get():
+async def root_get(request: Request):
     """
     A status endpoint, to validate the service is running.
     """
-    return {'status': 'OK'}
+    _runtime_delta = datetime.utcnow() - app.extra['started_at']
+    _uptime = {"days": _runtime_delta.days}
+    _uptime["hours"], rem = divmod(_runtime_delta.seconds, 3600)
+    _uptime["minutes"], _uptime["seconds"] = divmod(rem, 60)
+
+    return {
+        **{'counters': request.app.extra['counters']},
+        **{'uptime': _uptime},
+        **{'status': 'OK'},
+    }
 
 
 @app.get("{full_path:path}")
@@ -71,7 +81,6 @@ def run():
     Entry-point to have the ability to perform some application start logic.
     """
     c = configure(app)
-    app.extra['config'] = c
 
     from uvicorn.main import run
 

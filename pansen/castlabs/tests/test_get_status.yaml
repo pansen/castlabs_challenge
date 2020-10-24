@@ -1,0 +1,46 @@
+interactions:
+- request:
+    body: null
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - httpbin.org
+      user-agent:
+      - testclient
+      x-my-jwt:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MDM0OTk2ODIsImlzcyI6InBhbnNlbiIsImp0aSI6InBhbnNlbjoxMjA1YTY1ZS1kMjIyLTRmODctYTVkOS02NmU5MWZkNDAyYmMiLCJwYXlsb2FkIjp7InVzZXIiOiJyb25ueSIsImRhdGUiOiIyMDIwLTEwLTI0In19.iKD_9voY1YwrW-IztRzxadlnLzTzpqDocLFcx_vmTlfFg8yvV3OjWubysfGkAuRxOtPlolQLft5HKhEpbafPgg
+    method: GET
+    uri: http://httpbin.org/get?a=1&b=3
+  response:
+    body:
+      string: "{\n  \"args\": {\n    \"a\": \"1\", \n    \"b\": \"3\"\n  }, \n  \"headers\":
+        {\n    \"Accept\": \"*/*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"testclient\", \n
+        \   \"X-Amzn-Trace-Id\": \"Root=1-5f9376a3-3590118f69e82b131613ba76\", \n
+        \   \"X-My-Jwt\": \"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MDM0OTk2ODIsImlzcyI6InBhbnNlbiIsImp0aSI6InBhbnNlbjoxMjA1YTY1ZS1kMjIyLTRmODctYTVkOS02NmU5MWZkNDAyYmMiLCJwYXlsb2FkIjp7InVzZXIiOiJyb25ueSIsImRhdGUiOiIyMDIwLTEwLTI0In19.iKD_9voY1YwrW-IztRzxadlnLzTzpqDocLFcx_vmTlfFg8yvV3OjWubysfGkAuRxOtPlolQLft5HKhEpbafPgg\"\n
+        \ }, \n  \"origin\": \"79.225.187.23\", \n  \"url\": \"http://httpbin.org/get?a=1&b=3\"\n}\n"
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '661'
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 24 Oct 2020 00:34:43 GMT
+      Server:
+      - gunicorn/19.9.0
+    status:
+      code: 200
+      message: OK
+    url: http://httpbin.org/get?a=1&b=3
+version: 1

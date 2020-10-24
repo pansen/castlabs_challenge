@@ -60,5 +60,10 @@ In an other terminal, you can call
 ```bash
 http_proxy=127.0.0.1:8000 curl 'httpbin.org/get?a=1'
 ```
-
 to see the thing in action.
+
+To see the status of the instance, call
+
+```bash
+curl localhost:8000/status
+```

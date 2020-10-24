@@ -12,10 +12,16 @@ from pansen.castlabs.lib.http import _token
 from pansen.castlabs.main import app
 
 
+@cast_vcr.use_cassette
 def test_get_status(test_client: TestClient):
     res = test_client.get('/status')
     assert 200 == res.status_code
-    assert {'status': 'OK'} == res.json()
+    assert {'counters': {'GET': 0, 'POST': 0}, 'status': 'OK',
+            'uptime': {'days': 0, 'hours': 0, 'minutes': 0, 'seconds': 0}} == res.json()
+
+    test_client.get('http://httpbin.org/get?a=1&b=3')
+    res = test_client.get('/status')
+    assert 1 == res.json()['counters']['GET']
 
 
 # @pytest.mark.skip('Only for testing locally, not part of the requirements')
@@ -40,7 +46,8 @@ def test_post_subrequest(test_client: TestClient, config: Config):
     url = 'http://httpbin.org/post?a=1&b=2'
     post_data = b'abc'
 
-    with cast_vcr.use_cassette('test_post_subrequest.yaml') as cassette:
+    with cast_vcr.use_cassette(os.path.join(os.path.dirname(__file__), 'test_post_subrequest.yaml')) \
+            as cassette:
         res = test_client.post(url, data=post_data)
 
         request: Request = cassette.requests[0]
@@ -71,10 +78,12 @@ def test_token_fail():
 
     try:
         jwt.decode(token, 'wrong', algorithms=[c.JWT_ALGO, ])
+        assert False
     except Exception as e:
         assert isinstance(e, InvalidSignatureError)
 
     try:
         decoded = jwt.decode(token, c.JWT_SECRET, algorithms=['None', ])
+        assert False
     except Exception as e:
         assert isinstance(e, InvalidAlgorithmError)
